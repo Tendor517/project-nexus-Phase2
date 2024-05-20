@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="signUp.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form method="post" action="signup.php" onsubmit="return validateForm()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required pattern="^(?!.*(.)\1)[a-zA-Z0-9]{6,}$" title="Password must be at least 6 characters long and contain non-consecutive characters.">
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required pattern="^.+@gmail\.com$" title="Email must contain at least one character followed by @gmail.com.">
+            <br>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Validate password (at least 6 characters long and contain non-consecutive characters)
+            var password = document.getElementById("password").value;
+            if (password.length < 6 || /(.)\1/.test(password)) {
+                alert("Password must be at least 6 characters long and contain non-consecutive characters.");
+                return false;
+            }
+
+            // Validate email (at least one character followed by @gmail.com)
+            var email = document.getElementById("email").value;
+            if (!/.+@gmail\.com$/.test(email)) {
+                alert("Email must contain at least one character followed by @gmail.com.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
